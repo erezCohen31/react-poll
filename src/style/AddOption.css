@@ -1,7 +1,7 @@
 #enterOP {
   border: 2px solid salmon;
   border-radius: 15px;
-  background-color: #ffb6c1;
+  background-color: #ffb6c192;
   color: white;
   padding: 8px 16px;
   font-weight: bold;
@@ -10,11 +10,12 @@
 }
 
 #enterOP::placeholder {
-  color: white;
+  color: rgb(255, 255, 255);
   opacity: 0.8;
 }
 
 #enterOP:focus {
   border-color: salmon;
   box-shadow: 0 0 5px rgba(255, 160, 160, 0.5);
+  background-color: #ffb6c1;
 }

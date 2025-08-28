@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./App.css";
 import { ResultButton } from "./components/ResultButton.tsx";
 import { ContainerVotes } from "./components/ContainerVotes.tsx";
+import { AddOption } from "./components/AddOption.tsx";
+import "./App.css";
 
 export default function App() {
   const [options, setOptions] = useState<string[]>(["React", "Vue", "Svelte"]);
@@ -52,7 +54,7 @@ export default function App() {
   return (
     <div id="page">
       <h2>Mini Poll</h2>
-      {showResults && <span>{getWinner()}</span>}
+      {showResults && <span id="result">{getWinner()}</span>}
       <ContainerVotes
         options={options}
         showResults={showResults}
@@ -61,15 +63,11 @@ export default function App() {
       />
       <ResultButton showResults={showResults} setShowResults={setShowResults} />
       <button onClick={handleResetVotes}>Reset Votes</button>
-      <div>
-        <input
-          type="text"
-          value={newOption}
-          onChange={(e) => setNewOption(e.target.value)}
-          placeholder="Enter new option"
-        />
-        <button onClick={handleAddOption}>Add Option</button>
-      </div>
+      <AddOption
+        newOption={newOption}
+        setNewOption={setNewOption}
+        handleAddOption={handleAddOption}
+      />
     </div>
   );
 }

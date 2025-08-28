@@ -1,5 +1,6 @@
 import { VoteButton } from "./Button.tsx";
 import type { ContainerVotesProps } from "../interface/ContainerVotesProps.ts";
+import "../style/ContainerVotes.css";
 
 export function ContainerVotes({
   options,

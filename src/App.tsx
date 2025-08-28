@@ -5,13 +5,14 @@ import { ResultButton } from "./components/ResultButton.tsx";
 import type { Option } from "./interface/Option.ts";
 
 export default function App() {
-  const options: Option[] = ["React", "Vue", "Svelte"];
+  const [options, setOptions] = useState<Option[]>(["React", "Vue", "Svelte"]);
   const [votes, setVotes] = useState<Record<Option, number>>({
     React: 0,
     Vue: 0,
     Svelte: 0,
   });
   const [showResults, setShowResults] = useState(false);
+  const [newOption, setNewOption] = useState("");
 
   const handleVote = (option: Option) => {
     setVotes((prev) => ({
@@ -19,10 +20,34 @@ export default function App() {
       [option]: prev[option] + 1,
     }));
   };
+  const handleAddOption = () => {
+    if (!newOption.trim()) {
+      alert("Please enter a name.");
+      return;
+    }
+    setOptions((prev) => [...prev, newOption]);
+    setVotes((prev) => ({ ...prev, [newOption]: 0 }));
+    setNewOption("");
+  };
+  const getWinner = () => {
+    const maxVotes = Math.max(...options.map((opt) => votes[opt]));
+
+    const winners = options.filter((opt) => votes[opt] === maxVotes);
+
+    if (winners.length === options.length) {
+      return "It's a tie between everyone";
+    } else if (winners.length > 1) {
+      return "It's a tie between: " + winners.join(", ");
+    } else {
+      return `The winner is ${winners[0]} 🏆 with ${maxVotes} votes`;
+    }
+  };
 
   return (
     <div>
       <h2>Mini Poll</h2>
+
+      {showResults && <span>{getWinner()}</span>}
       <ul>
         {options.map((option) => (
           <li key={option}>
@@ -32,6 +57,16 @@ export default function App() {
         ))}
       </ul>
       <ResultButton showResults={showResults} setShowResults={setShowResults} />
+
+      <div>
+        <input
+          type="text"
+          value={newOption}
+          onChange={(e) => setNewOption(e.target.value)}
+          placeholder="Enter new option"
+        />
+        <button onClick={handleAddOption}>Add Option</button>
+      </div>
     </div>
   );
 }

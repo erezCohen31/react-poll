@@ -1,1 +1,1 @@
-export type Option = "React" | "Vue" | "Svelte";
+export type Option = string;

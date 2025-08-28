@@ -42,11 +42,17 @@ export default function App() {
       return `The winner is ${winners[0]} 🏆 with ${maxVotes} votes`;
     }
   };
+  const handleResetVotes = () => {
+    const resetVotes: { [key: string]: number } = {};
+    options.forEach((option) => {
+      resetVotes[option] = 0;
+    });
+    setVotes(resetVotes);
+  };
 
   return (
     <div>
       <h2>Mini Poll</h2>
-
       {showResults && <span>{getWinner()}</span>}
       <ul>
         {options.map((option) => (
@@ -57,7 +63,7 @@ export default function App() {
         ))}
       </ul>
       <ResultButton showResults={showResults} setShowResults={setShowResults} />
-
+      <button onClick={handleResetVotes}>Reset Votes</button>
       <div>
         <input
           type="text"

@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./App.css";
-import VoteButton from "./components/Button.tsx";
 import { ResultButton } from "./components/ResultButton.tsx";
-import type { Option } from "./interface/Option.ts";
+import { ContainerVotes } from "./components/ContainerVotes.tsx";
 
 export default function App() {
-  const [options, setOptions] = useState<Option[]>(["React", "Vue", "Svelte"]);
-  const [votes, setVotes] = useState<Record<Option, number>>({
+  const [options, setOptions] = useState<string[]>(["React", "Vue", "Svelte"]);
+  const [votes, setVotes] = useState<Record<string, number>>({
     React: 0,
     Vue: 0,
     Svelte: 0,
@@ -14,7 +13,7 @@ export default function App() {
   const [showResults, setShowResults] = useState(false);
   const [newOption, setNewOption] = useState("");
 
-  const handleVote = (option: Option) => {
+  const handleVote = (option: string) => {
     setVotes((prev) => ({
       ...prev,
       [option]: prev[option] + 1,
@@ -51,17 +50,15 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div id="page">
       <h2>Mini Poll</h2>
       {showResults && <span>{getWinner()}</span>}
-      <ul>
-        {options.map((option) => (
-          <li key={option}>
-            {option} {showResults && `- Votes: ${votes[option]}`}
-            <VoteButton option={option} onVote={handleVote} />
-          </li>
-        ))}
-      </ul>
+      <ContainerVotes
+        options={options}
+        showResults={showResults}
+        votes={votes}
+        handleVote={handleVote}
+      />
       <ResultButton showResults={showResults} setShowResults={setShowResults} />
       <button onClick={handleResetVotes}>Reset Votes</button>
       <div>

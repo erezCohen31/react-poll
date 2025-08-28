@@ -14,13 +14,13 @@ export default function App() {
   return (
     <div>
       <h2>Mini Poll</h2>
-      <div>
+      <ul>
         {options.map((option) => (
-          <div key={option}>
+          <li key={option}>
             {option} - Votes: {votes[option]}
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

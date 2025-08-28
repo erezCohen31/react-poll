@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-
-type Option = "React" | "Vue" | "Svelte";
+import VoteButton from "./components/Button.tsx";
+import type { Option } from "./interface/Option.ts";
 
 export default function App() {
   const options: Option[] = ["React", "Vue", "Svelte"];
@@ -10,6 +10,12 @@ export default function App() {
     Vue: 0,
     Svelte: 0,
   });
+  const handleVote = (option: Option) => {
+    setVotes((prev) => ({
+      ...prev,
+      [option]: prev[option] + 1,
+    }));
+  };
 
   return (
     <div>
@@ -18,6 +24,7 @@ export default function App() {
         {options.map((option) => (
           <li key={option}>
             {option} - Votes: {votes[option]}
+            <VoteButton option={option} onVote={handleVote} />
           </li>
         ))}
       </ul>

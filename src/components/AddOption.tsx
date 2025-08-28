@@ -1,4 +1,5 @@
 import type { AddOptionProps } from "../interface/AddOptionProps.ts";
+import "../style/AddOption.css";
 
 export function AddOption({
   newOption,
@@ -6,8 +7,9 @@ export function AddOption({
   handleAddOption,
 }: AddOptionProps) {
   return (
-    <div>
+    <div id="">
       <input
+        id="enterOP"
         type="text"
         value={newOption}
         onChange={(e) => setNewOption(e.target.value)}

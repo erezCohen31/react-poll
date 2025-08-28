@@ -40,7 +40,7 @@ export default function App() {
     } else if (winners.length > 1) {
       return "It's a tie between: " + winners.join(", ");
     } else {
-      return `The winner is ${winners[0]} 🏆 with ${maxVotes} votes`;
+      return `The winner is ${winners[0]} with ${maxVotes} votes`;
     }
   };
   const handleResetVotes = () => {

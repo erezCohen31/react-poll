@@ -1,0 +1,20 @@
+#enterOP {
+  border: 2px solid salmon;
+  border-radius: 15px;
+  background-color: #ffb6c1;
+  color: white;
+  padding: 8px 16px;
+  font-weight: bold;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#enterOP::placeholder {
+  color: white;
+  opacity: 0.8;
+}
+
+#enterOP:focus {
+  border-color: salmon;
+  box-shadow: 0 0 5px rgba(255, 160, 160, 0.5);
+}

@@ -9,7 +9,7 @@ export function ContainerVotes({
   handleVote,
 }: ContainerVotesProps) {
   return (
-    <ul>
+    <ul id="liste">
       {options.map((option) => (
         <li key={option}>
           {option} {showResults && `- Votes: ${votes[option]}`}
